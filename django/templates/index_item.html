@@ -1,0 +1,71 @@
+{% extends  'index.html'%}
+{% block content %}
+<div class="ui equal width grid" style="width:90%;margin: 5px 5px 5px 20px">
+            <div class="row">
+                <div class="column">
+                    <div class="ui red segment">
+                        <div class="ui statistic">
+                            <div class="value">
+                               流动人数：{{ count }} 个
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui blue segment">
+                      <div class="ui statistic">
+                            <div class="value">
+                               总记录数：{{ counts }} 条
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                   <table class="table table-striped">
+                        <thead>
+                            <tr>
+                            <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;时间</th>
+                            <th>门名称</th>
+                            <th>用户名称</th>
+                            <th>用户类型</th>
+                            <th>是否开门</th>
+                            <th>用户编号</th>
+                            <th>门地址</th>
+                            <th>卡号</th>
+                            </tr>
+                        </thead>
+                                <tbody>
+                                    {%  for i in ArtiInfo %}
+                                    <tr>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ i.date }}</td>
+                                    <td>{{ i.door_name}}</td>
+                                    <td>{{i.use_name}}</td>
+                                    <td>{{i.use_type }}</td>
+                                    <td>{{i.door_open }}</td>
+                                    <td>{{i.user_id }}</td>
+                                    <td>{{ i.door_adress }}</td>
+                                    <td>{{ i.car_id }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                   </table>
+
+        </div>
+                {#     < pre 1 of 2 Nest>#}
+                 <div class="main-content-pagitor">
+                        {% if ArtiInfo.has_previous %}
+                            <a href="?page={{ ArtiInfo.previous_page_number }}">
+                            <i class="left arrow icon"></i>
+                            </a>
+                        {% endif %}
+                                <span> {{ ArtiInfo.number }} of {{ ArtiInfo.paginator.num_pages }}</span>
+                        {% if ArtiInfo.has_next%}
+                            <a href="?page={{ ArtiInfo.next_page_number }}">
+                            <i class="right arrow icon"></i>
+                            </a>
+                        {% endif %}
+                 </div>
+            </div>
+{% endblock %}

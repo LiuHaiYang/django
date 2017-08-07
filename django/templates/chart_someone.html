@@ -1,0 +1,89 @@
+{% extends  'index.html'%}
+{% block content %}
+    <div class="ui equal width grid" style="width:80%;margin: 5px 5px 5px 20px">
+        <div class="row">
+                <div class="column">
+                    <div class="ui red segment">
+                        <div class="ui statistic">
+                            <div class="value">
+                               <p>实验室门禁刷卡总次数表：</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        <div class="row">
+            <div class="column">
+                <div class="ui container segment">
+                    <div class="ui simple dropdown item">
+                        学生<i class="dropdown icon"></i>
+                        <div class="menu">
+                            <div class="item">娄尚</div>
+                            <div class="item">李楠</div>
+                            <div class="item">刘军</div>
+                            <div class="item">孟佳</div>
+                            <div class="item">党腾</div>
+                            <div class="item">赵辉</div>
+                            <div class="item">徐晓梦</div>
+                            <div class="item">杨世成</div>
+                            <div class="item">汪志龙</div>
+                            <div class="item">宋延强</div>
+                            <div class="item">吴之遥</div>
+                            <div class="item">刘海洋</div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="ui container" id="chart_someone"></div>
+                </div>
+            </div>
+
+        </div>
+
+{% endblock %}
+
+{% block chart %}
+<script>
+$(function () {
+    $('#chart_someone').highcharts({
+        title: {
+            text: '实验室门禁刷卡详情',
+            x: -20 //center
+        },
+        xAxis: {
+            categories: []
+        },
+        credits: {
+          enabled:false
+            },
+        yAxis: {
+            title: {
+                text: '次数'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '次'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '赵辉',
+            data: [0, 1, 2, 1, 2, 1, 2, 3, 3, 3, 1, 2, 2, 3, 0, 2, 2, 2, 2, 1, 0, 1, 3, 0, 1, 2, 1, 1, 1, 2, 2]
+        }]
+    });
+});
+
+</script>
+{% endblock %}
+

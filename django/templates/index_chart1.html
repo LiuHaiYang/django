@@ -1,0 +1,256 @@
+{% extends  'index.html'%}
+{% block content %}
+    <div class="ui equal width grid" style="width:90%;margin: 5px 5px 5px 20px">
+        <div class="row">
+                <div class="column">
+                    <div class="ui red segment">
+                        <div class="ui statistic">
+                            <div class="value">
+                               <p>实验室刷门禁卡次数表：</p>
+                                </div>
+                                <div class="xingqi" style="float:left;position: relative;left: 420px;top:-45px;">
+                            <select class="ui search dropdown" style="width: 200px">
+                                  <option value="">周次</option>
+                                  <option value="AL">第一周</option>
+                                  <option value="AK">第二周</option>
+                                  <option value="AZ">第三周</option>
+                                  <option value="AR">第四周</option>
+                                  <option value="CA">第五周</option>
+                                  <option value="CO">第六周</option>
+                                  <option value="CT">第七周</option>
+                                  <option value="DE">第八周</option>
+                                  <option value="DC">第九周</option>
+                                  <option value="FL">第十周</option>
+                                  <option value="GA">第十一周</option>
+                                  <option value="HI">第十二周</option>
+                                  <option value="ID">第十三周</option>
+                                  <option value="IL">第十四周</option>
+                                  <option value="IN">第十五周</option>
+                                  <option value="IA">第十六周</option>
+                                  <option value="KS">第十七周</option>
+                                  <option value="KY">第十八周</option>
+                                  <option value="LA">第十九周</option>
+                                </select>
+                            </div>
+                                <div calss="tuxing" style="float:right;position: absolute;left: 640px;top:26px;">
+                                    <select class="ui dropdown"  style="width: 200px">
+                                          <option  >图形</option>
+                                          <option  id="chart11">柱状图</option>
+                                          <option  id="chart22">扇形图</option>
+                                          <option id="chart33">折线图</option>
+                                    </select>
+                        </div>
+                        </div>
+
+                             </div>
+                    </div>
+                </div>
+
+        <div class="row">
+            <div class="column">
+                <div class="ui container segment">
+                    <div class="ui container " style="display:block" id="chart1"></div>
+                    <div class="ui container" style="display:block" id="chart2"></div>
+                    <div class="ui container" style="display:block" id="chart3"></div>
+                    <div class="ui container" style="display:block" id="chart_diyizhou"></div>
+                <div class="ui container" style="display:block" >{{ a }}</div>
+                </div>
+            </div>
+
+        </div>
+
+{% endblock %}
+
+{% block chart %}
+    <script>
+$(function () {
+    $('#chart1').highcharts({
+        chart: {
+            type: 'column'
+        },
+
+        title: {
+            text: '实验室门禁卡刷卡总次数'
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '次数'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} 次</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        credits: {
+          enabled:false
+                },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        xAxis: {
+            categories: [
+                '娄尚',
+                '李楠',
+                '刘军',
+                '孟佳',
+                '党腾',
+                '赵辉',
+                '徐晓梦',
+                '杨世成',
+                '汪志龙',
+                '宋志强',
+                '吴之遥',
+                '刘海洋',
+                '朱雪',
+                '甄重',
+            ],
+            crosshair: true
+        },
+
+        series: [{
+            name: '个人总次数',
+            data: [{{ counts_ls}}, {{ counts_ln}}, {{ counts_lj}}, {{ counts_mj}}, {{ counts_dt}}, {{ counts_zh}},
+                {{ counts_xxm}}, {{ counts_ysc}}, {{ counts_wzc}},{{ counts_szq}},{{ counts_wzy}},{{ counts_lhy}},
+                {{ counts_zx }},{{ counts_zhz }}]
+
+        }]
+    });
+});
+
+</script>
+    <script>
+    $(function () {
+
+        $('#chart2').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+             credits: {
+          enabled:false
+                },
+            title: {
+                text: '实验室门禁卡刷卡总次数'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: '总次数比率',
+                colorByPoint: true,
+                data: [{
+                    name: '娄尚',
+                    y: {{ counts_ls }}
+                },{
+                    name: '李楠',
+                    y: {{ counts_ln }}
+                }, {
+                    name: '刘军',
+                    y: {{ counts_lj }}
+                }, {
+                    name: '孟佳',
+                    y: {{ counts_mj }}
+                }, {
+                    name: '党腾',
+                    y: {{ counts_dt }}
+                }, {
+                    name: '赵辉',
+                    y: {{ counts_zh }}
+                }, {
+                    name: '徐晓梦',
+                    y: {{ counts_xxm }}
+                }, {
+                    name: '杨世成',
+                    y: {{ counts_ysc }}
+                }, {
+                    name: '汪志龙',
+                    y: {{ counts_wzc }}
+                }, {
+                    name: '宋志强',
+                    y: {{ counts_szq }}
+                }, {
+                    name: '吴之遥',
+                    y:{{ counts_wzy }}
+                }, {
+                    name: '刘海洋',
+                    y: {{ counts_lhy }}
+                }]
+            }]
+        });
+    });
+
+    </script>
+    <script>
+    $(function () {
+    $('#chart3').highcharts({
+        title: {
+            text: '实验室门禁卡刷卡总次数',
+            x: -20 //center
+        },
+        xAxis: {
+            categories: [
+                '娄尚',
+                '李楠',
+                '刘军',
+                '孟佳',
+                '党腾',
+                '赵辉',
+                '徐晓梦',
+                '杨世成',
+                '汪志龙',
+                '宋志强',
+                '吴之遥',
+                '刘海洋'
+            ],
+        },
+        yAxis: {
+            title: {
+                text: '次数'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: 'black'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '次'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+         credits: {
+          enabled:false
+                },
+        series: [{
+            name: '总次数',
+           data: [{{ counts_ls}}, {{ counts_ln}}, {{ counts_lj}}, {{ counts_mj}}, {{ counts_dt}}, {{ counts_zh}},
+                {{ counts_xxm}}, {{ counts_ysc}}, {{ counts_wzc}},{{ counts_szq}},{{ counts_wzy}},{{ counts_lhy}}]
+        }]
+    });
+});
+    </script>
+{% endblock %}
